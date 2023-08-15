@@ -19,6 +19,15 @@ CREATE TABLE users(
     password TEXT
 );
 
+DROP TABLE IF EXISTS habits;
+CREATE TABLE habits(
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    difficulty TEXT,
+    description TEXT,
+    icon TEXT
+);
+
 DROP TABLE IF EXISTS users_habits;
 CREATE TABLE users_habits(
     id SERIAL PRIMARY KEY,
@@ -42,17 +51,7 @@ CREATE TABLE stats(
     year NUMERIC,
     CHECK (year >= 2023),
     completion NUMERIC,
-    CHECK (completion >= 1 OR completion <= 3)
+    CHECK (completion >= 1 OR completion <= 3),
     progress NUMERIC,
-    CHECK (progress >= 0 OR progress <= 2)
-);
-
-DROP TABLE IF EXISTS habits;
-CREATE TABLE habits(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(30),
-    difficulty NUMERIC,
-    CHECK (difficulty >= 0 AND difficulty <= 5),
-    description TEXT,
-    icon TEXT
+    CHECK (progress >= 1 OR progress <= 2)
 );
