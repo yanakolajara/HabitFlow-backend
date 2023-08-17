@@ -1,23 +1,23 @@
 \c habit_flow
 
 INSERT INTO 
-users (id, first_name, last_name, dob_day, dob_month, dob_year, gender, email, password)
+users (first_name, last_name, dob_day, dob_month, dob_year, gender, email, password)
 VALUES
-(1, 'John', 'Doe', 15, 3, 1990, 'Male', 'john.doe@example.com', 'PizzaLover99'),
-(2, 'Jane', 'Smith', 5, 8, 1985, 'Female', 'jane.smith@example.com', 'CoffeeBreak88'),
-(3, 'Alex', 'Johnson', 10, 11, 2000, 'Non-Binary', 'alex.johnson@example.com', 'MountainView9'),
-(4, 'Chris', 'Williams', 20, 6, 1998, 'Other', 'chris.williams@example.com', 'Sunshine22'),
-(5, 'Taylor', 'Brown', 12, 9, 1992, 'Female', 'taylor.brown@example.com', 'simplepassword'),
-(6, 'Jordan', 'Miller', 8, 2, 1987, 'Male', 'jordan.miller@example.com', '12345678'),
-(7, 'Sam', 'Davis', 25, 7, 1995, 'Non-Binary', 'sam.davis@example.com', 'Moonlight17'),
-(8, 'Jamie', 'Martinez', 18, 4, 1993, 'Other', 'jamie.martinez@example.com', 'PurpleSky7'),
-(9, 'Alexis', 'Johnson', 9, 10, 1988, 'Non-Binary', 'alexis.johnson@example.com', 'password123'),
-(10, 'Riley', 'Anderson', 14, 1, 2001, 'Male', 'riley.anderson@example.com', 'SoccerFan16'),
-(11, 'Jordan', 'White', 6, 12, 1994, 'Female', 'jordan.white@example.com', 'HappyDance123'),
-(12, 'Avery', 'Lee', 21, 5, 1986, 'Non-Binary', 'avery.lee@example.com', 'StarryNight8'),
-(13, 'Charlie', 'Taylor', 11, 3, 1997, 'Other', 'charlie.taylor@example.com', 'securepass'),
-(14, 'Alex', 'Clark', 3, 7, 1989, 'Male', 'alex.clark@example.com', 'GuitarRock5'),
-(15, 'Riley', 'Garcia', 17, 8, 2002, 'Female', 'riley.garcia@example.com', 'Chocolate7');
+('John', 'Doe', 15, 3, 1990, 'Male', 'john.doe@example.com', 'PizzaLover99'),
+('Jane', 'Smith', 5, 8, 1985, 'Female', 'jane.smith@example.com', 'CoffeeBreak88'),
+('Alex', 'Johnson', 10, 11, 2000, 'Non-Binary', 'alex.johnson@example.com', 'MountainView9'),
+('Chris', 'Williams', 20, 6, 1998, 'Other', 'chris.williams@example.com', 'Sunshine22'),
+('Taylor', 'Brown', 12, 9, 1992, 'Female', 'taylor.brown@example.com', 'simplepassword'),
+('Jordan', 'Miller', 8, 2, 1987, 'Male', 'jordan.miller@example.com', '12345678'),
+('Sam', 'Davis', 25, 7, 1995, 'Non-Binary', 'sam.davis@example.com', 'Moonlight17'),
+('Jamie', 'Martinez', 18, 4, 1993, 'Other', 'jamie.martinez@example.com', 'PurpleSky7'),
+('Alexis', 'Johnson', 9, 10, 1988, 'Non-Binary', 'alexis.johnson@example.com', 'password123'),
+('Riley', 'Anderson', 14, 1, 2001, 'Male', 'riley.anderson@example.com', 'SoccerFan16'),
+('Jordan', 'White', 6, 12, 1994, 'Female', 'jordan.white@example.com', 'HappyDance123'),
+('Avery', 'Lee', 21, 5, 1986, 'Non-Binary', 'avery.lee@example.com', 'StarryNight8'),
+('Charlie', 'Taylor', 11, 3, 1997, 'Other', 'charlie.taylor@example.com', 'securepass'),
+('Alex', 'Clark', 3, 7, 1989, 'Male', 'alex.clark@example.com', 'GuitarRock5'),
+('Riley', 'Garcia', 17, 8, 2002, 'Female', 'riley.garcia@example.com', 'Chocolate7');
 
 INSERT INTO
 habits (name, difficulty, description)
