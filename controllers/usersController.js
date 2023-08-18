@@ -6,7 +6,10 @@ const {
     createNewUser,
     updateUserInfo,
     deleteUser,
+    login,
+    findUserWithToken
 } = require('../queries/users');
+const jwt = require('jsonwebtoken')
 
 
 router.get('/', async (req,res) =>{
@@ -86,6 +89,30 @@ router.delete('/:id', async(req,res) => {
         }
     } catch (error) {
         
+    }
+})
+
+router.post('/login', async (req,res) => {
+    console.log(req.body)
+    try {
+        const foundUser = await login(req.body)
+        res.json(foundUser)
+    }catch(e){
+        res.status(500).json({error: error})
+    }
+})
+router.get('/verify-token/:authToken', async (req,res) => {
+    try {
+        const token = jwt.verify(req.params.authToken, process.env.JWT_TOKEN_SECRET_KEY)
+        const user = await findUserWithToken(token.id);
+        if(user[0]){
+            res.json(user)
+        }else{
+            res.status(404).json({error: "User not found"})
+        }
+    } catch (error) {
+        console.log(error)
+        res.send(false)
     }
 })
 

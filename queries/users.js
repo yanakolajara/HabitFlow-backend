@@ -1,4 +1,6 @@
 const db = require('../db/dbConfig');
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const getAllUsers = async () => {
     try {
@@ -47,10 +49,51 @@ const deleteUser = async (id) => {
     }
 }
 
+const login = async (data) => {
+    try {
+        const {email, password} = data;
+        const foundUser = await db.any("SELECT * FROM users WHERE email =  $1", [email])
+        if(foundUser.length === 0){
+            throw{
+                message: "error",
+                error: "User does not exists, please sign up."
+            }
+        }else{
+            let user = foundUser[0];
+            const comparedPassword = password === user.password
+            console.log(comparedPassword)
+            if(!comparedPassword){
+                throw { message: "error", error: "Please check your email and password"}
+            }else{
+                let jwtToken = jwt.sign({
+                    id: user.id,
+                    email: user.email
+                }, process.env.JWT_TOKEN_SECRET_KEY,
+                {expiresIn: "7d"}
+                )
+                return jwtToken;
+            }
+        }
+    } catch (error) {
+        return error
+    }
+}
+
+const findUserWithToken = async (id) => {
+    try {
+        const user = await db.any("SELECT * FROM users WHERE id = $1", [id])
+        return user
+    } catch (error) {
+        return error;
+    }
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
     createNewUser,
     updateUserInfo,
-    deleteUser
+    deleteUser,
+    login,
+    findUserWithToken
 }
