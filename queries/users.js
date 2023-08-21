@@ -61,7 +61,6 @@ const login = async (data) => {
         }else{
             let user = foundUser[0];
             const comparedPassword = password === user.password
-            console.log(comparedPassword)
             if(!comparedPassword){
                 throw { message: "error", error: "Please check your email and password"}
             }else{

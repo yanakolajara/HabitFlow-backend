@@ -47,7 +47,6 @@ router.post('/', async (req,res) => {
     const gender = req.body.gender
     const email = req.body.email
     const password = req.body.password
-
     try {
         const newUser = await createNewUser(first_name, last_name, dob_day, dob_month, dob_year, gender, email, password);
         res.status(200).json(newUser)

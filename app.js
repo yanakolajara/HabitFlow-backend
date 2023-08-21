@@ -14,9 +14,14 @@ app.use(cors())
 
 app.use('/users',users)
 app.use('/habits',habits)
+users.use('/:userId/habits',habits)
 
 app.get('/', (req,res) => {
     res.send('Hello')
+})
+
+app.get('*', (req,res) => {
+    res.status(404).json({error: "Page not found"})
 })
 
 module.exports = app;

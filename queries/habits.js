@@ -47,10 +47,51 @@ const updateHabitInfo = async (name, difficulty, description, id) => {
     }
 }
 
+const getUserHabits = (id) => {
+    try {
+        const userHabits = db.any("SELECT * FROM users_habits WHERE user_id = $1", [id])
+        return userHabits;
+    } catch (error) {
+        return error;
+    }
+}
+
+const addHabitToUser = (userId, habitId) => {
+    try {
+        const habitToUser = db.any("INSERT INTO users_habits (user_id, habit_id) VALUES ($1, $2) RETURNING *", [userId, habitId])
+        return habitToUser;
+    } catch (error) {
+        return error;
+    }
+}
+
+const getHabitStats = (userId, habitId) => {
+    try {
+        const stats =  db.any("SELECT * FROM stats WHERE user_id = $1 AND habit_id = $2", [userId, habitId])
+        return stats;
+    } catch (error) {
+        return error;
+    }
+}
+
+const createHabitStats = (user_id, habit_id, day, month, year, completion, progress) => {
+    try {
+        const habitStat = db.any("INSERT INTO stats (user_id, habit_id, day, month, year, completion, progress) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+        [user_id, habit_id, day, month, year, completion, progress])
+        return habitStat
+    } catch (error) {
+        return error;
+    }
+}
+
 module.exports = {
     getAllHabits,
     getHabitById,
     createNewHabit,
     deleteHabit,
-    updateHabitInfo
+    updateHabitInfo,
+    getUserHabits,
+    addHabitToUser,
+    getHabitStats,
+    createHabitStats
 }

@@ -1,13 +1,61 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 
 const {
     getAllHabits,
     getHabitById,
     createNewHabit,
     deleteHabit,
-    updateHabitInfo
+    updateHabitInfo,
+    getUserHabits,
+    addHabitToUser,
+    getHabitStats,
+    createHabitStats
 } = require('../queries/habits')
+
+router.get('/stats/:habitId', async (req,res) => {
+    try {
+        const stats = await getHabitStats(req.params.userId, req.params.habitId);
+        res.status(200).json(stats)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+})
+
+router.post('/stats/:habitId', async (req,res) => {
+    try {
+        const createStats = await createHabitStats(req.params.userId, req.params.habitId, req.body.day, req.body.month, req.body.year, req.body.completion, req.body.progress);
+        res.status(200).json(createStats)
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+})
+
+router.get('/user-habits', async (req,res) => {
+    try {
+        const userHabits = await getUserHabits(req.params.userId);
+        if(userHabits[0]){
+            res.status(200).json(userHabits)
+        }else{
+            res.json({})
+        }
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+})
+
+router.post('/user-habits/:habitId', async (req,res) => {
+    try {
+        const habitToUser = await addHabitToUser(req.params.userId, req.params.habitId);
+        if(habitToUser){
+            res.status(200).json(habitToUser)
+        }else{
+            res.status(404).json({error: 'User or habit not found'})
+        }
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+})
 
 router.get('/', async (req,res) => {
     try {
