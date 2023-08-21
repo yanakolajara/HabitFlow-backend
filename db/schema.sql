@@ -3,7 +3,11 @@ CREATE DATABASE habit_flow;
 
 \c habit_flow;
 
+DROP TABLE IF EXISTS stats;
+DROP TABLE IF EXISTS users_habits;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS habits;
+
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50),
@@ -19,7 +23,6 @@ CREATE TABLE users(
     password TEXT
 );
 
-DROP TABLE IF EXISTS habits;
 CREATE TABLE habits(
     id SERIAL PRIMARY KEY,
     name TEXT,
@@ -28,7 +31,6 @@ CREATE TABLE habits(
     icon TEXT
 );
 
-DROP TABLE IF EXISTS users_habits;
 CREATE TABLE users_habits(
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users (id)
@@ -37,7 +39,6 @@ CREATE TABLE users_habits(
     ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS stats;
 CREATE TABLE stats(
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users (id)
